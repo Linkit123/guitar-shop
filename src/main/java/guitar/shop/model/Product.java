@@ -2,10 +2,7 @@ package guitar.shop.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Table(name = "product")
@@ -27,7 +24,7 @@ public class Product {
     @Column(name = "image")
     private String image;
 
-    @Column(name = "updated_date")
+    @Column(name = "updatedDate")
     private String updatedDate;
 
     @Column(name = "amount")
@@ -38,6 +35,18 @@ public class Product {
 
     @Column(name = "color")
     private String color;
+
+    @ManyToOne
+    @JoinColumn(name = "category_id", nullable = false)
+    private Category category;
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
 
     public String getProductId() {
         return productId;

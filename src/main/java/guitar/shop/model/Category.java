@@ -1,5 +1,6 @@
 package guitar.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.CascadeType;
 
@@ -18,8 +19,9 @@ public class Category {
     private String image;
     private String active;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "category")
-    //    @Cascade(value = {CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @JsonIgnore
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "category")
+    @Cascade(value = {CascadeType.SAVE_UPDATE, CascadeType.DELETE})
     private List<Product> listProduct = new ArrayList<>();
 
     public List<Product> getListProduct() {

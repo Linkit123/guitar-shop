@@ -9,36 +9,31 @@ import javax.persistence.*;
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
     @Id
-    @Column(name = "productId")
     private String productId;
 
-    @Column(name = "name")
     private String name;
 
-    @Column(name = "price")
     private Integer price;
 
-    @Column(name = "weight")
     private Integer weight;
 
-    @Column(name = "image")
     private String image;
 
-    @Column(name = "updatedDate")
     private String updatedDate;
 
-    @Column(name = "amount")
     private String amount;
 
-    @Column(name = "discount")
     private String discount;
 
-    @Column(name = "color")
     private String color;
 
     @ManyToOne
-    @JoinColumn(name = "category_id", nullable = false)
+    @JoinColumn(nullable = false)
     private Category category;
+
+    @ManyToOne
+    @JoinColumn(nullable = false)
+    private Supplier supplier;
 
     public Category getCategory() {
         return category;
@@ -46,6 +41,14 @@ public class Product {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public Supplier getSupplier() {
+        return supplier;
+    }
+
+    public void setSupplier(Supplier supplier) {
+        this.supplier = supplier;
     }
 
     public String getProductId() {

@@ -22,7 +22,7 @@ public class Supplier {
     private String email;
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "supplier")
-    @Cascade(value = {CascadeType.SAVE_UPDATE, CascadeType.DELETE})
+    @Cascade(value = CascadeType.ALL)
     private List<Product> listProduct = new ArrayList<>();
 
     public List<Product> getListProduct() {

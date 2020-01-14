@@ -26,7 +26,7 @@ public class SupplierController {
     private static final String CODE_CREATED  = "CREATED";
     private static final String CODE_EXISTED = "EXISTED";
     private static final String CODE_SUCCESS = "SUCCESS";
-    private static final String NOT_FOUND = "NOT_FOUND";
+    private static final String CODE_NOT_FOUND = "NOT_FOUND";
 
     @GetMapping(value = "/_search")
     public ResponseEntity<List<Supplier>> getAllCustomer(){

@@ -27,21 +27,21 @@ public class Product {
 
     private String color;
 
-    @ManyToOne
-    @JoinColumn(nullable = false)
-    private Category category;
+//    @ManyToOne
+//    @JoinColumn(nullable = false)
+//    private Category category;
 
     @ManyToOne
-    @JoinColumn(nullable = false)
+    @JoinColumn
     private Supplier supplier;
 
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
+//    public Category getCategory() {
+//        return category;
+//    }
+//
+//    public void setCategory(Category category) {
+//        this.category = category;
+//    }
 
     public Supplier getSupplier() {
         return supplier;

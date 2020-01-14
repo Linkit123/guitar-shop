@@ -44,7 +44,7 @@ public class ProductController {
     }
 
     @PostMapping(value="/_create")
-    public ResponseEntity<Object> addCustomer(@RequestBody Product product){
+    public ResponseEntity<Object> addProduct(@RequestBody Product product){
         HashMap<String, Object> productResponse = new HashMap<>();
         try {
             productService.addProduct(product);

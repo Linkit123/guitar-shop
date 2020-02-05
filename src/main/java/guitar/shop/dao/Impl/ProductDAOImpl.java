@@ -21,7 +21,13 @@ public class ProductDAOImpl implements ProductDAO {
     @Override
     public void addProduct(Product product) {
         Session session = sessionFactory.getCurrentSession();
-        session.save(product);
+        try {
+            session = sessionFactory.openSession();
+            session.save(product);
+        } catch (Exception e) {
+            LOGGER.error(e.getMessage(), e);
+        }
+        session.close();
     }
 
     @Override

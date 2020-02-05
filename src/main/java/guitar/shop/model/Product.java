@@ -1,15 +1,18 @@
 package guitar.shop.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "product")
 @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Product {
     @Id
-    private String productId;
+    private String id;
 
     private String name;
 
@@ -27,44 +30,18 @@ public class Product {
 
     private String color;
 
-//    @ManyToOne
-//    @JoinColumn(nullable = false)
-//    private Category category;
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "product_supplier", joinColumns = {@JoinColumn(name = "productId")},
+            inverseJoinColumns = {@JoinColumn(name = "supplierId")})
+    @JsonIgnore
+    private Set<Supplier> listSupplier = new HashSet<>();
 
-    @ManyToOne
-    @JoinColumn
-    private Supplier supplier;
-
-//    public Category getCategory() {
-//        return category;
-//    }
-//
-//    public void setCategory(Category category) {
-//        this.category = category;
-//    }
-
-    public Supplier getSupplier() {
-        return supplier;
+    public String getId() {
+        return id;
     }
 
-    public void setSupplier(Supplier supplier) {
-        this.supplier = supplier;
-    }
-
-    public String getProductId() {
-        return productId;
-    }
-
-    public void setProductId(String productId) {
-        this.productId = productId;
-    }
-
-    public String getUpdatedDate() {
-        return updatedDate;
-    }
-
-    public void setUpdatedDate(String updatedDate) {
-        this.updatedDate = updatedDate;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -99,6 +76,13 @@ public class Product {
         this.image = image;
     }
 
+    public String getUpdatedDate() {
+        return updatedDate;
+    }
+
+    public void setUpdatedDate(String updatedDate) {
+        this.updatedDate = updatedDate;
+    }
 
     public String getAmount() {
         return amount;
@@ -122,5 +106,13 @@ public class Product {
 
     public void setColor(String color) {
         this.color = color;
+    }
+
+    public Set<Supplier> getListSupplier() {
+        return listSupplier;
+    }
+
+    public void setListSupplier(Set<Supplier> listSupplier) {
+        this.listSupplier = listSupplier;
     }
 }

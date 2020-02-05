@@ -1,19 +1,21 @@
 package guitar.shop.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import org.hibernate.annotations.Cascade;
-import org.hibernate.annotations.CascadeType;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.json.JSONPropertyIgnore;
 
 import javax.persistence.*;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "supplier")
 public class Supplier {
 
     @Id
-    private String supplierId;
+    private String id;
     private String name;
     private String contact;
     private String address;
@@ -21,24 +23,18 @@ public class Supplier {
     private String tel;
     private String email;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "supplier")
-    @Cascade(value = CascadeType.ALL)
-    private List<Product> listProduct = new ArrayList<>();
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "product_supplier", joinColumns = {@JoinColumn(name = "supplierId")},
+    inverseJoinColumns = {@JoinColumn(name = "productId")})
+    @JsonIgnore
+    private Set<Product> listProduct = new HashSet<>();
 
-    public List<Product> getListProduct() {
-        return listProduct;
+    public String getId() {
+        return id;
     }
 
-    public void setListProduct(List<Product> listProduct) {
-        this.listProduct = listProduct;
-    }
-
-    public String getSupplierId() {
-        return supplierId;
-    }
-
-    public void setSupplierId(String supplierId) {
-        this.supplierId = supplierId;
+    public void setId(String id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -87,5 +83,13 @@ public class Supplier {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public Set<Product> getListProduct() {
+        return listProduct;
+    }
+
+    public void setListProduct(Set<Product> listProduct) {
+        this.listProduct = listProduct;
     }
 }

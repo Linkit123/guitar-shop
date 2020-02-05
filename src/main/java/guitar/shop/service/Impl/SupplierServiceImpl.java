@@ -20,12 +20,12 @@ public class SupplierServiceImpl implements SupplierService {
     @Override
     public void addSupplier(Supplier supplier) {
         String id= "";
-        if(supplier.getSupplierId() == null) {
+        if(supplier.getId() == null) {
             id = ProductUtils.generateCustomerId(8);
         }else {
-            id = supplier.getSupplierId();
+            id = supplier.getId();
         }
-        supplier.setSupplierId(id);
+        supplier.setId(id);
         supplierDAO.addSupplier(supplier);
     }
 

@@ -20,12 +20,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public void addProduct(Product product) {
         String id= "";
-        if(product.getProductId() == null) {
+        if(product.getId() == null) {
             id = ProductUtils.generateCustomerId(8);
         }else {
-            id = product.getProductId();
+            id = product.getId();
         }
-        product.setProductId(id);
+        product.setId(id);
         productDAO.addProduct(product);
     }
 

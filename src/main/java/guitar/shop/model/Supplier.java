@@ -23,7 +23,7 @@ public class Supplier {
     private String tel;
     private String email;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     @JoinTable(name = "product_supplier", joinColumns = {@JoinColumn(name = "supplierId")},
     inverseJoinColumns = {@JoinColumn(name = "productId")})
     @JsonIgnore
